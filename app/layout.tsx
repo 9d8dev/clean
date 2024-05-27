@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { NavMenu } from "@/components/layout/nav-menu";
+import { MobileNav } from "@/components/layout/mobile-nav";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Section, Container } from "@/components/craft";
+import Balancer from "react-wrap-balancer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +23,73 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <Nav />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
+
+const Nav = ({ className, children, id }: NavProps) => {
+  return (
+    <nav
+      className={cn("sticky z-50 top-0 bg-background", "border-b", className)}
+      id={id}
+    >
+      <div
+        id="nav-container"
+        className="max-w-5xl mx-auto py-4 px-6 sm:px-8 flex justify-between items-center"
+      >
+        <Link className="hover:opacity-75 transition-all" href="/">
+          <h2 className="sr-only">Damai Global</h2>
+          <Image src="/logo.svg" alt="Logo" width={164} height={28.5}></Image>
+        </Link>
+        {children}
+        <div className="flex items-center gap-2">
+          <NavMenu />
+          <Button asChild>
+            <Link href="/contact">Contact Us</Link>
+          </Button>
+          <MobileNav />
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+const Footer = () => {
+  return (
+    <footer className="drop-shadow-sm">
+      <Section>
+        <Container className="grid gap-6">
+          <div className="grid gap-6">
+            <Link href="/">
+              <h3 className="sr-only">Damai Global</h3>
+              <Image
+                src="/logo.svg"
+                alt="Logo"
+                width={164}
+                height={28.5}
+              ></Image>
+            </Link>
+            <p>
+              <Balancer>
+                Damai Global specializes in finding the best global talent.
+              </Balancer>
+            </p>
+            <div className="flex gap-4 underline underline-offset-4 text-sm text-muted-foreground">
+              <Link href="#">Privacy Policy</Link>
+              <Link href="#">Terms of Service</Link>
+            </div>
+            <p className="text-muted-foreground">
+              © Damai Global LLC. All rights reserved. 2023-present.
+            </p>
+          </div>
+        </Container>
+      </Section>
+    </footer>
+  );
+};
