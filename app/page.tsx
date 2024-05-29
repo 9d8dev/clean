@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <Main>
       <Hero />
-      <Calendar event="30min" />
+      {/* <Calendar event="30min" /> */}
     </Main>
   );
 }

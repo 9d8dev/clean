@@ -6,7 +6,9 @@ import { Badge } from "./ui/badge";
 import Calendar from "./cal";
 
 export default function Form() {
-  const [selectedPackage, setSelectedPackage] = React.useState({});
+  const [selectedPackage, setSelectedPackage] = React.useState<string | null>(
+    null
+  );
   const [step, setStep] = React.useState(1);
 
   return (
@@ -18,7 +20,7 @@ export default function Form() {
           <div
             className="border border-black p-4 rounded-md hover:scale-105 transition-all cursor-pointer"
             onClick={() => {
-              setSelectedPackage({ package: "interior" });
+              setSelectedPackage("Interior");
               setStep((prev) => prev + 1);
             }}
           >
@@ -36,7 +38,7 @@ export default function Form() {
           <div
             className="border border-black p-4 rounded-md hover:scale-105 transition-all cursor-pointer"
             onClick={() => {
-              setSelectedPackage({ package: "exterior" });
+              setSelectedPackage("Exterior");
               setStep((prev) => prev + 1);
             }}
           >
@@ -55,7 +57,7 @@ export default function Form() {
           <div
             className="border border-black p-4 rounded-md hover:scale-105 transition-all cursor-pointer"
             onClick={() => {
-              setSelectedPackage({ package: "maintenance" });
+              setSelectedPackage("Maintenance cleaning");
               setStep((prev) => prev + 1);
             }}
           >
@@ -80,7 +82,7 @@ export default function Form() {
       )}
       {step === 3 && (
         <Container className="not-prose">
-          <Calendar event="30min" />
+          <Calendar event="30min" packageType={selectedPackage} />
         </Container>
       )}
     </Section>
