@@ -1,9 +1,10 @@
 import { Main } from "@/components/craft";
+import Form from "@/components/form";
 
 export default function Page() {
   return (
     <Main>
-      <h1>Test</h1>
+      <Form />
     </Main>
   );
 }
