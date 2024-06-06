@@ -2,13 +2,45 @@
 
 import * as React from "react";
 import { Section, Container } from "@/components/craft";
-import { Badge } from "./ui/badge";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import Calendar from "./cal";
+
+const alacarteItems = [
+  {
+    name: "engine",
+    text: "Engine bay cleaning and dressing",
+  },
+  {
+    name: "leather",
+    text: "Leather Cleaning and Conditioning",
+  },
+  {
+    name: "fabric",
+    text: "Fabric Protection",
+  },
+  {
+    name: "odor",
+    text: "Odor Elimination",
+  },
+  {
+    name: "waxing",
+    text: "Waxing/Sealing",
+  },
+];
 
 export default function Form() {
   const [selectedPackage, setSelectedPackage] = React.useState<string | null>(
     null
   );
+  const [alacarte, setAlacarte] = React.useState<AlaCarteStateObject>({
+    engine: false,
+    leather: false,
+    fabric: false,
+    odor: false,
+    waxing: false,
+  });
   const [step, setStep] = React.useState(1);
 
   return (
@@ -75,14 +107,39 @@ export default function Form() {
       )}
       {step === 2 && (
         <Container className="not-prose">
-          <h1>aslkdjfslfjs</h1>
+          <h1>A La Carte Services</h1>
+          <div className="flex flex-col gap-2">
+            {alacarteItems.map((item, index) => (
+              <Label
+                key={index}
+                htmlFor={item.name}
+                className="font-normal border border-black p-2 rounded-md inline-flex items-center gap-4"
+              >
+                <Checkbox
+                  id={item.name}
+                  checked={alacarte[item.name]}
+                  onCheckedChange={() =>
+                    setAlacarte((prev) => ({
+                      ...prev,
+                      [item.name]: !prev[item.name],
+                    }))
+                  }
+                />
+                <span>{item.text}</span>
+              </Label>
+            ))}
+          </div>
           <button onClick={() => setStep((prev) => prev - 1)}>Previous</button>
           <button onClick={() => setStep((prev) => prev + 1)}>Next</button>
         </Container>
       )}
       {step === 3 && (
         <Container className="not-prose">
-          <Calendar event="30min" packageType={selectedPackage} />
+          <Calendar
+            event="30min"
+            packageType={selectedPackage}
+            alacarte={alacarte}
+          />
         </Container>
       )}
     </Section>

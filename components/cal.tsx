@@ -6,9 +6,11 @@ import { useEffect } from "react";
 export default function Calendar({
   event,
   packageType,
+  alacarte,
 }: {
   event: string;
   packageType: string | null;
+  alacarte: AlaCarteStateObject;
 }) {
   useEffect(() => {
     (async function () {
@@ -22,7 +24,7 @@ export default function Calendar({
   }, []);
   return (
     <Cal
-      calLink={`cameron-youngblood-vynxzq/${event}?package=${packageType}`}
+      calLink={`cameron-youngblood-vynxzq/${event}?package=${packageType}&alacarte.Engine bay cleaning and dressing=${alacarte.engine}&alacarte.Leather Cleaning and Conditioning=${alacarte.leather}&alacarte.Fabric Protection=${alacarte.fabric}&alacarte.Odor Elimination=${alacarte.odor}&alacarte.Waxing/Sealing=${alacarte.waxing}`}
       style={{ width: "100%", height: "100%", overflow: "scroll" }}
       config={{ layout: "month_view" }}
     />
