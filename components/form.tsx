@@ -135,11 +135,7 @@ export default function Form() {
       )}
       {step === 3 && (
         <Container className="not-prose">
-          <Calendar
-            event="30min"
-            packageType={selectedPackage}
-            alacarte={alacarte}
-          />
+          <Calendar packageType={selectedPackage} alacarte={alacarte} />
         </Container>
       )}
     </Section>

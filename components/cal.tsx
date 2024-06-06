@@ -2,16 +2,31 @@
 
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
+import { constructCalendarURL } from "@/lib/utils/calendar-url";
+
+const serviceValues: AlaCarteServiceValues = {
+  engine: "Engine bay cleaning and dressing",
+  leather: "Leather Cleaning and Conditioning",
+  fabric: "Fabric Protection",
+  odor: "Odor Elimination",
+  waxing: "Waxing/Sealing",
+};
+
+const baseURL = "https://cal.com/cameron-youngblood-vynxzq/30min";
 
 export default function Calendar({
-  event,
   packageType,
   alacarte,
 }: {
-  event: string;
   packageType: string | null;
   alacarte: AlaCarteStateObject;
 }) {
+  const calendarURL = constructCalendarURL(
+    alacarte,
+    serviceValues,
+    packageType,
+    baseURL
+  );
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({});
@@ -24,7 +39,7 @@ export default function Calendar({
   }, []);
   return (
     <Cal
-      calLink={`cameron-youngblood-vynxzq/${event}?package=${packageType}&alacarte.Engine bay cleaning and dressing=${alacarte.engine}&alacarte.Leather Cleaning and Conditioning=${alacarte.leather}&alacarte.Fabric Protection=${alacarte.fabric}&alacarte.Odor Elimination=${alacarte.odor}&alacarte.Waxing/Sealing=${alacarte.waxing}`}
+      calLink={calendarURL || baseURL}
       style={{ width: "100%", height: "100%", overflow: "scroll" }}
       config={{ layout: "month_view" }}
     />

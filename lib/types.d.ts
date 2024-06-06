@@ -12,3 +12,11 @@ type AlaCarteStateObject = {
   waxing?: boolean;
   [key: string]: boolean;
 };
+
+type AlaCarteServiceValues = {
+  engine: string;
+  leather: string;
+  fabric: string;
+  odor: string;
+  waxing: string;
+};
