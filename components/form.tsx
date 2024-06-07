@@ -42,9 +42,9 @@ export default function Form() {
     <Section className="not-prose">
       {step === 1 && (
         <div>
-          <Container>
+          <Container className="max-w-2xl">
             <h1 className="text-2xl mb-6">Start by selecting a base package</h1>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid gap-4">
               {/* Option 1 */}
               <Option
                 title="Interior Cleaning"
@@ -86,14 +86,14 @@ export default function Form() {
       )}
 
       {step === 2 && (
-        <Container className="not-prose">
+        <Container className="not-prose max-w-2xl">
           <h1>A La Carte Services</h1>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 my-6">
             {alacarteItems.map((item, index) => (
               <Label
                 key={index}
                 htmlFor={item.name}
-                className="font-normal border border-black p-2 rounded-md inline-flex items-center gap-4"
+                className="font-normal border p-4 rounded-md inline-flex items-center gap-4 cursor-pointer hover:bg-accent bg-accent/25 transition-all"
               >
                 <Checkbox
                   id={item.name}
@@ -109,28 +109,39 @@ export default function Form() {
               </Label>
             ))}
           </div>
-          <Button onClick={() => setStep((prev) => prev - 1)}>Previous</Button>
-          <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
+          <div className="flex gap-2">
+            <Button
+              variant="secondary"
+              onClick={() => setStep((prev) => prev - 1)}
+            >
+              Previous
+            </Button>
+            <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
+          </div>
         </Container>
       )}
 
       {step === 3 && (
-        <Container className="not-prose">
-          <div className="flex flex-row items-center justify-between rounded-lg border p-4">
+        <Container className="not-prose max-w-2xl">
+          <div className="flex flex-row items-center justify-between my-6 rounded-lg border p-4">
             <Label className="text-base" htmlFor="paintcorrection">
               Are you interested in paint correction?
             </Label>
             <div className="inline-flex items-center gap-2">
+              {paintCorrection ? <Label>Yes</Label> : <Label>No</Label>}
               <Switch
                 id="paintcorrection"
                 checked={paintCorrection}
                 onCheckedChange={() => setPaintCorrection((prev) => !prev)}
               />
-              {paintCorrection ? <Label>Yes</Label> : <Label>No</Label>}
             </div>
           </div>
-          <Button onClick={() => setStep((prev) => prev - 1)}>Previous</Button>
-          <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
+          <div className="flex gap-2">
+            <Button onClick={() => setStep((prev) => prev - 1)}>
+              Previous
+            </Button>
+            <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
+          </div>
         </Container>
       )}
 
@@ -144,10 +155,15 @@ export default function Form() {
             onChange={(e) => setNotes(e.target.value)}
             name="notes"
             id="notes"
-            className="min-h-[200px] resize-none"
+            className="min-h-[200px] resize-none mt-6"
           />
-          <Button onClick={() => setStep((prev) => prev - 1)}>Previous</Button>
-          <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
+
+          <div className="flex gap-2 mt-6">
+            <Button onClick={() => setStep((prev) => prev - 1)}>
+              Previous
+            </Button>
+            <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
+          </div>
         </Container>
       )}
 
@@ -161,9 +177,13 @@ export default function Form() {
             <p key={index}>
               {alacarteList[item?.item]}: ${item?.min} - ${item?.max}
             </p>
-          ))}
-          <Button onClick={() => setStep((prev) => prev - 1)}>Previous</Button>
-          <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
+          ))}{" "}
+          <div className="flex gap-2 mt-6">
+            <Button onClick={() => setStep((prev) => prev - 1)}>
+              Previous
+            </Button>
+            <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
+          </div>
         </Container>
       )}
 
@@ -175,8 +195,12 @@ export default function Form() {
             paintCorrection={paintCorrection}
             notes={notes}
           />
-          <Button onClick={() => setStep((prev) => prev - 1)}>Previous</Button>
-          <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
+          <div className="flex gap-2 mt-6">
+            <Button onClick={() => setStep((prev) => prev - 1)}>
+              Previous
+            </Button>
+            <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
+          </div>
         </Container>
       )}
     </Section>
@@ -197,18 +221,19 @@ const Option = ({
   onClick: () => void;
 }) => (
   <div
-    className="border p-4 md:p-6 bg-accent/50 rounded-md hover:scale-[1.02] transition-all cursor-pointer flex flex-col gap-4"
+    className="border p-4 md:p-6 bg-accent/50 rounded-md hover:bg-accent transition-all cursor-pointer flex flex-col gap-4"
     onClick={onClick}
   >
     {image && (
-      <div className="h-56 rounded-md mb-4 overflow-hidden flex items-center justify-center">
+      <div className="h-56 rounded-md overflow-hidden flex items-center justify-center">
         <Image src={image} alt={title} />
       </div>
     )}
     <div className="flex justify-between items-center gap-6">
       <h3 className="text-xl font-semibold">{title}</h3>
-      <p className="text-xl p-2 border rounded-sm bg-accent">${price}</p>
+      <p className="text-xl px-2 py-1 border rounded-sm bg-accent">${price}</p>
     </div>
+    <hr />
     <p>{description}</p>
   </div>
 );
