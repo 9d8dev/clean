@@ -2,15 +2,21 @@
 
 import * as React from "react";
 import { Section, Container } from "@/components/craft";
-import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import Calendar from "./cal";
 import { alacarteItems, alacarteList } from "@/lib/utils/alacarte-items";
 import { calculateTotalCostEstimate } from "@/lib/utils/calculate-estimate";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+
+import Image from "next/image";
+import Calendar from "./cal";
+
+import Exterior from "@/public/exterior.jpeg";
+import Interior from "@/public/interior.jpeg";
+import Service from "@/public/service.jpeg";
 
 export default function Form() {
   /* STATE DECLARATIONS */
@@ -35,65 +41,50 @@ export default function Form() {
   return (
     <Section className="not-prose">
       {step === 1 && (
-        <Container className="space-y-4">
-          <h1>Start by selecting a base package</h1>
-          {/* Option 1 */}
-          <div
-            className="border border-black p-4 rounded-md hover:scale-105 transition-all cursor-pointer"
-            onClick={() => {
-              setSelectedPackage("Interior");
-              setStep((prev) => prev + 1);
-            }}
-          >
-            <div className="inline-flex items-center gap-2">
-              <Badge>Interior</Badge>
-              <Badge variant="outline">$225</Badge>
+        <div>
+          <Container>
+            <h1 className="text-2xl mb-6">Start by selecting a base package</h1>
+            <div className="grid grid-cols-2 gap-4">
+              {/* Option 1 */}
+              <Option
+                title="Interior Cleaning"
+                image={Interior}
+                price={225}
+                description="Full vacuum, steam cleaning of floor mats, seats, windows, dash, steering wheel, consoles, and trunk. Shampooing where needed. Air freshening."
+                onClick={() => {
+                  setSelectedPackage("Interior");
+                  setStep((prev) => prev + 1);
+                }}
+              />
+
+              {/* Option 2 */}
+              <Option
+                title="Exterior Cleaning"
+                image={Exterior}
+                price={275}
+                description="Hand wash and dry, clay bar decontamination, wheel and wheel-well cleaning and dressing, full waxing and sealing of all paint surfaces, trim and plastic restoration, tire dressing, glass cleaning."
+                onClick={() => {
+                  setSelectedPackage("Exterior");
+                  setStep((prev) => prev + 1);
+                }}
+              />
+
+              {/* Option 3 */}
+              <Option
+                title="Maintenance Cleaning"
+                image={Service}
+                price={135}
+                description="Full vacuum, steam cleaning of floor mats, seats, windows, dash, steering wheel, consoles, and trunk. Shampooing where needed. Air freshening."
+                onClick={() => {
+                  setSelectedPackage("Maintenance cleaning");
+                  setStep((prev) => prev + 1);
+                }}
+              />
             </div>
-            <p>
-              Full vacuum, steam cleaning of floor mats, seats, windows, dash,
-              steering wheel, consoles, and trunk. Shampooing where needed. Air
-              freshening.
-            </p>
-          </div>
-          {/* Option 2 */}
-          <div
-            className="border border-black p-4 rounded-md hover:scale-105 transition-all cursor-pointer"
-            onClick={() => {
-              setSelectedPackage("Exterior");
-              setStep((prev) => prev + 1);
-            }}
-          >
-            <div className="inline-flex items-center gap-2">
-              <Badge>Exterior</Badge>
-              <Badge variant="outline">$275</Badge>
-            </div>
-            <p>
-              Hand wash and dry, clay bar decontamination, wheel and wheel-well
-              cleaning and dressing, full waxing and sealing of all paint
-              surfaces, trim and plastic restoration, tire dressing, glass
-              cleaning.
-            </p>
-          </div>
-          {/* Option 3 */}
-          <div
-            className="border border-black p-4 rounded-md hover:scale-105 transition-all cursor-pointer"
-            onClick={() => {
-              setSelectedPackage("Maintenance cleaning");
-              setStep((prev) => prev + 1);
-            }}
-          >
-            <div className="inline-flex items-center gap-2">
-              <Badge>Maintenance Cleaning</Badge>
-              <Badge variant="outline">$135</Badge>
-            </div>
-            <p>
-              Full vacuum, steam cleaning of floor mats, seats, windows, dash,
-              steering wheel, consoles, and trunk. Shampooing where needed. Air
-              freshening.
-            </p>
-          </div>
-        </Container>
+          </Container>
+        </div>
       )}
+
       {step === 2 && (
         <Container className="not-prose">
           <h1>A La Carte Services</h1>
@@ -122,6 +113,7 @@ export default function Form() {
           <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
         </Container>
       )}
+
       {step === 3 && (
         <Container className="not-prose">
           <div className="flex flex-row items-center justify-between rounded-lg border p-4">
@@ -141,6 +133,7 @@ export default function Form() {
           <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
         </Container>
       )}
+
       {step === 4 && (
         <Container className="not-prose">
           <Label htmlFor="notes" className="text-base">
@@ -157,6 +150,7 @@ export default function Form() {
           <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
         </Container>
       )}
+
       {step === 5 && (
         <Container className="not-prose">
           Total Cost estimate: ${minPrice} - ${maxPrice}
@@ -172,6 +166,7 @@ export default function Form() {
           <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
         </Container>
       )}
+
       {step === 6 && (
         <Container className="not-prose">
           <Calendar
@@ -187,3 +182,33 @@ export default function Form() {
     </Section>
   );
 }
+
+const Option = ({
+  title,
+  price,
+  description,
+  onClick,
+  image,
+}: {
+  title: string;
+  price: number;
+  description: string;
+  image?: StaticImport;
+  onClick: () => void;
+}) => (
+  <div
+    className="border p-4 md:p-6 bg-accent/50 rounded-md hover:scale-[1.02] transition-all cursor-pointer flex flex-col gap-4"
+    onClick={onClick}
+  >
+    {image && (
+      <div className="h-56 rounded-md mb-4 overflow-hidden flex items-center justify-center">
+        <Image src={image} alt={title} />
+      </div>
+    )}
+    <div className="flex justify-between items-center gap-6">
+      <h3 className="text-xl font-semibold">{title}</h3>
+      <p className="text-xl p-2 border rounded-sm bg-accent">${price}</p>
+    </div>
+    <p>{description}</p>
+  </div>
+);
