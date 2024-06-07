@@ -17,14 +17,20 @@ const baseURL = "https://cal.com/cameron-youngblood-vynxzq/30min";
 export default function Calendar({
   packageType,
   alacarte,
+  paintCorrection,
+  notes,
 }: {
   packageType: string | null;
   alacarte: AlaCarteStateObject;
+  paintCorrection: boolean;
+  notes: string;
 }) {
   const calendarURL = constructCalendarURL(
     alacarte,
     serviceValues,
     packageType,
+    paintCorrection,
+    notes,
     baseURL
   );
   useEffect(() => {

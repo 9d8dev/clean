@@ -4,33 +4,16 @@ import * as React from "react";
 import { Section, Container } from "@/components/craft";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 import Calendar from "./cal";
-
-const alacarteItems = [
-  {
-    name: "engine",
-    text: "Engine bay cleaning and dressing",
-  },
-  {
-    name: "leather",
-    text: "Leather Cleaning and Conditioning",
-  },
-  {
-    name: "fabric",
-    text: "Fabric Protection",
-  },
-  {
-    name: "odor",
-    text: "Odor Elimination",
-  },
-  {
-    name: "waxing",
-    text: "Waxing/Sealing",
-  },
-];
+import { alacarteItems, alacarteList } from "@/lib/utils/alacarte-items";
+import { calculateTotalCostEstimate } from "@/lib/utils/calculate-estimate";
 
 export default function Form() {
+  /* STATE DECLARATIONS */
   const [selectedPackage, setSelectedPackage] = React.useState<string | null>(
     null
   );
@@ -41,13 +24,19 @@ export default function Form() {
     odor: false,
     waxing: false,
   });
+  const [paintCorrection, setPaintCorrection] = React.useState<boolean>(false);
+  const [notes, setNotes] = React.useState<string>("");
   const [step, setStep] = React.useState(1);
+
+  /* CALCULATE TOTAL COST ESTIMATE */
+  const data = calculateTotalCostEstimate(selectedPackage, alacarte);
+  const { minPrice = 0, maxPrice = 0, itemizedList } = data ?? {};
 
   return (
     <Section className="not-prose">
       {step === 1 && (
         <Container className="space-y-4">
-          <h1>Options</h1>
+          <h1>Start by selecting a base package</h1>
           {/* Option 1 */}
           <div
             className="border border-black p-4 rounded-md hover:scale-105 transition-all cursor-pointer"
@@ -129,13 +118,70 @@ export default function Form() {
               </Label>
             ))}
           </div>
-          <button onClick={() => setStep((prev) => prev - 1)}>Previous</button>
-          <button onClick={() => setStep((prev) => prev + 1)}>Next</button>
+          <Button onClick={() => setStep((prev) => prev - 1)}>Previous</Button>
+          <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
         </Container>
       )}
       {step === 3 && (
         <Container className="not-prose">
-          <Calendar packageType={selectedPackage} alacarte={alacarte} />
+          <div className="flex flex-row items-center justify-between rounded-lg border p-4">
+            <Label className="text-base" htmlFor="paintcorrection">
+              Are you interested in paint correction?
+            </Label>
+            <div className="inline-flex items-center gap-2">
+              <Switch
+                id="paintcorrection"
+                checked={paintCorrection}
+                onCheckedChange={() => setPaintCorrection((prev) => !prev)}
+              />
+              {paintCorrection ? <Label>Yes</Label> : <Label>No</Label>}
+            </div>
+          </div>
+          <Button onClick={() => setStep((prev) => prev - 1)}>Previous</Button>
+          <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
+        </Container>
+      )}
+      {step === 4 && (
+        <Container className="not-prose">
+          <Label htmlFor="notes" className="text-base">
+            Any additional things we should be aware of?
+          </Label>
+          <Textarea
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            name="notes"
+            id="notes"
+            className="min-h-[200px] resize-none"
+          />
+          <Button onClick={() => setStep((prev) => prev - 1)}>Previous</Button>
+          <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
+        </Container>
+      )}
+      {step === 5 && (
+        <Container className="not-prose">
+          Total Cost estimate: ${minPrice} - ${maxPrice}
+          <p>
+            {itemizedList?.package.name}: ${itemizedList?.package.price}
+          </p>
+          {itemizedList?.alacarte.map((item, index) => (
+            <p key={index}>
+              {alacarteList[item?.item]}: ${item?.min} - ${item?.max}
+            </p>
+          ))}
+          <Button onClick={() => setStep((prev) => prev - 1)}>Previous</Button>
+          <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
+        </Container>
+      )}
+      {step === 6 && (
+        <Container className="not-prose">
+          <Calendar
+            packageType={selectedPackage}
+            alacarte={alacarte}
+            paintCorrection={paintCorrection}
+            notes={notes}
+          />
+          <Button onClick={() => setStep((prev) => prev - 1)}>Previous</Button>
+          <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
         </Container>
       )}
     </Section>
