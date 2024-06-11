@@ -13,6 +13,7 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 import Image from "next/image";
 import Calendar from "./cal";
+import CountUp from "react-countup";
 
 import Exterior from "@/public/exterior.jpeg";
 import Interior from "@/public/interior.jpeg";
@@ -149,7 +150,7 @@ export default function Form() {
       )}
 
       {step === 4 && (
-        <Container className="not-prose">
+        <Container className="not-prose w-full max-w-2xl">
           <Label htmlFor="notes" className="text-base">
             Any additional things we should be aware of?
           </Label>
@@ -175,18 +176,18 @@ export default function Form() {
       )}
 
       {step === 5 && (
-        <Container className="not-prose max-w-2xl bg-accent/25 border flex flex-col gap-4">
+        <Container className="not-prose max-w-2xl bg-accent/25 border rounded-lg flex flex-col gap-4">
           <div className="flex justify-between gap-4">
             <p>{itemizedList?.package.name}</p>
             <p className="font-mono py-1 px-2 border rounded-md bg-accent/50">
-              ${itemizedList?.package.price}
+              $<CountUp end={itemizedList?.package.price || 0} />
             </p>
           </div>
           {itemizedList?.alacarte.map((item, index) => (
             <div className="flex justify-between gap-4" key={index}>
               <p>{alacarteList[item?.item]}</p>
               <p className="font-mono py-1 px-2 border rounded-md bg-accent/50">
-                ${item?.min} - ${item?.max}
+                $<CountUp end={item?.min} /> - $<CountUp end={item?.max} />
               </p>
             </div>
           ))}{" "}
@@ -194,7 +195,7 @@ export default function Form() {
           <div className="flex justify-between gap-4 font-medium">
             <p>Estimated Total</p>
             <p className="font-mono py-1 px-2 border rounded-md bg-accent/50">
-              ${minPrice} - ${maxPrice}
+              $<CountUp end={minPrice} /> - $<CountUp end={maxPrice} />
             </p>
           </div>
           <div className="flex gap-2 mt-6">
@@ -217,15 +218,6 @@ export default function Form() {
             paintCorrection={paintCorrection}
             notes={notes}
           />
-          <div className="flex gap-2 mt-6">
-            <Button
-              variant="secondary"
-              onClick={() => setStep((prev) => prev - 1)}
-            >
-              Previous
-            </Button>
-            <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
-          </div>
         </Container>
       )}
     </Section>
