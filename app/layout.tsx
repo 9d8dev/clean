@@ -66,7 +66,7 @@ const Nav = ({ className, children, id }: NavProps) => {
 
 const Footer = () => {
   return (
-    <footer className="border-t">
+    <footer className="border-t pb-12 md:mb-0">
       <Section>
         <Container className="grid gap-6">
           <div className="grid gap-6">

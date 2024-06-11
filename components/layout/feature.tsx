@@ -4,7 +4,7 @@ import Balancer from "react-wrap-balancer";
 import Link from "next/link";
 
 // Icons
-import { Coins } from "lucide-react";
+import { Car } from "lucide-react";
 
 type FeatureText = {
   icon: JSX.Element;
@@ -14,19 +14,19 @@ type FeatureText = {
 
 const featureText: FeatureText[] = [
   {
-    icon: <Coins className="w-6 h-6" />,
+    icon: <Car className="w-6 h-6" />,
     title: "Interior Cleaning",
     description:
       "Full vacuum, steam cleaning of floor mats, seats, windows, dash, steering wheel, consoles, and trunk. Shampooing where needed. Air freshening.",
   },
   {
-    icon: <Coins className="w-6 h-6" />,
+    icon: <Car className="w-6 h-6" />,
     title: "Exterior Cleaning",
     description:
       "Hand wash and dry, clay bar decontamination, wheel and wheel-well cleaning and dressing, full waxing and sealing of all paint surfaces, trim and plastic restoration, tire dressing, glass cleaning.",
   },
   {
-    icon: <Coins className="w-6 h-6" />,
+    icon: <Car className="w-6 h-6" />,
     title: "Maintenance Cleaning",
     description:
       "Full vacuum, steam cleaning of floor mats, seats, windows, dash, steering wheel, consoles, and trunk. Shampooing where needed. Air freshening.",
@@ -39,9 +39,7 @@ const Feature = () => {
       <Craft.Container className="not-prose">
         <div className="flex flex-col gap-6">
           <h3 className="text-4xl">
-            <Balancer>
-              Our Car Cleaning Services
-            </Balancer>
+            <Balancer>Our Car Cleaning Services</Balancer>
           </h3>
           <h4 className="text-2xl font-light opacity-70">
             <Balancer>
