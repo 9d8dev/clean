@@ -137,7 +137,10 @@ export default function Form() {
             </div>
           </div>
           <div className="flex gap-2">
-            <Button onClick={() => setStep((prev) => prev - 1)}>
+            <Button
+              variant="secondary"
+              onClick={() => setStep((prev) => prev - 1)}
+            >
               Previous
             </Button>
             <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
@@ -152,6 +155,7 @@ export default function Form() {
           </Label>
           <Textarea
             value={notes}
+            placeholder="Enter notes here..."
             onChange={(e) => setNotes(e.target.value)}
             name="notes"
             id="notes"
@@ -159,7 +163,10 @@ export default function Form() {
           />
 
           <div className="flex gap-2 mt-6">
-            <Button onClick={() => setStep((prev) => prev - 1)}>
+            <Button
+              variant="secondary"
+              onClick={() => setStep((prev) => prev - 1)}
+            >
               Previous
             </Button>
             <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
@@ -168,18 +175,33 @@ export default function Form() {
       )}
 
       {step === 5 && (
-        <Container className="not-prose">
-          Total Cost estimate: ${minPrice} - ${maxPrice}
-          <p>
-            {itemizedList?.package.name}: ${itemizedList?.package.price}
-          </p>
-          {itemizedList?.alacarte.map((item, index) => (
-            <p key={index}>
-              {alacarteList[item?.item]}: ${item?.min} - ${item?.max}
+        <Container className="not-prose max-w-2xl bg-accent/25 border flex flex-col gap-4">
+          <div className="flex justify-between gap-4">
+            <p>{itemizedList?.package.name}</p>
+            <p className="font-mono py-1 px-2 border rounded-md bg-accent/50">
+              ${itemizedList?.package.price}
             </p>
+          </div>
+          {itemizedList?.alacarte.map((item, index) => (
+            <div className="flex justify-between gap-4" key={index}>
+              <p>{alacarteList[item?.item]}</p>
+              <p className="font-mono py-1 px-2 border rounded-md bg-accent/50">
+                ${item?.min} - ${item?.max}
+              </p>
+            </div>
           ))}{" "}
+          <hr />
+          <div className="flex justify-between gap-4 font-medium">
+            <p>Estimated Total</p>
+            <p className="font-mono py-1 px-2 border rounded-md bg-accent/50">
+              ${minPrice} - ${maxPrice}
+            </p>
+          </div>
           <div className="flex gap-2 mt-6">
-            <Button onClick={() => setStep((prev) => prev - 1)}>
+            <Button
+              variant="secondary"
+              onClick={() => setStep((prev) => prev - 1)}
+            >
               Previous
             </Button>
             <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
@@ -196,7 +218,10 @@ export default function Form() {
             notes={notes}
           />
           <div className="flex gap-2 mt-6">
-            <Button onClick={() => setStep((prev) => prev - 1)}>
+            <Button
+              variant="secondary"
+              onClick={() => setStep((prev) => prev - 1)}
+            >
               Previous
             </Button>
             <Button onClick={() => setStep((prev) => prev + 1)}>Next</Button>
