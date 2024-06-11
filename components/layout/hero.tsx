@@ -23,7 +23,7 @@ const Hero = () => {
             />{" "}
             with an unyielding dedication{" "}
             <Image
-              className="inline my-auto w-24 md:w-48 md:-mt-1 -mt-3"
+              className="inline my-auto w-24 md:w-48 md:-mt-2 -mt-3"
               width={192}
               height={108}
               src={BMW}
@@ -41,16 +41,15 @@ const Hero = () => {
           {/* End Text */}
           <div className="md:text-lg">
             <p className="hidden md:block">
-              We make components for marketing sites.
-            </p>
-            <div className="md:flex grid gap-2">
-              <p className="opacity-50">
-                Visit craftui.org to use our components for free.{" "}
-              </p>
-              <Link className="hover:opacity-70 transition-all" href="#">
-                Check it Out -{`>`}
+              We are a team of passionate car enthusiasts who are dedicated to
+              providing the highest quality of service to our clients.{" "}
+              <Link
+                className="hover:opacity-70 transition-all underline"
+                href="/book"
+              >
+                Book Now
               </Link>
-            </div>
+            </p>
             <p className="text-xs mt-4">
               <span className="opacity-50">Available now online.</span> Tell us
               what you build next.
