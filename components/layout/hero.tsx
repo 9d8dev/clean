@@ -3,30 +3,33 @@ import Image from "next/image";
 import Logo from "@/public/logo.svg";
 import Link from "next/link";
 
+import Porsche from "@/public/porsche.png";
+import BMW from "@/public/bmw.png";
+
 const Hero = () => {
   return (
     <Section className="not-prose">
       <Container>
         <div className="w-full h-full m-auto max-w-5xl md:py-10 py-4 flex flex-col gap-8">
           {/* Large Text */}
-          <h1 className="text-3xl md:text-6xl font-normal tracking-tight">
-            This is a component {/* eslint-disable-next-line */}
-            <img
+          <h1 className="text-3xl md:text-6xl font-normal">
+            Elevating the art of automotive detailing{" "}
+            <Image
               className="inline my-auto w-24 md:w-48 md:-mt-6 -mt-3"
               width={192}
               height={108}
-              src="https://newsroom.porsche.com/dam/jcr:a388376a-c5e2-4363-939b-6fbacd867a64/718_neu_2023.png"
+              src={Porsche}
               alt=""
-            ></img>{" "}
-            with special {/* eslint-disable-next-line */}
-            <img
-              className="inline my-auto w-24 md:w-48 md:-mt-6 -mt-3"
+            />{" "}
+            with an unyielding dedication{" "}
+            <Image
+              className="inline my-auto w-24 md:w-48 md:-mt-1 -mt-3"
               width={192}
               height={108}
-              src="https://newsroom.porsche.com/dam/jcr:a388376a-c5e2-4363-939b-6fbacd867a64/718_neu_2023.png"
+              src={BMW}
               alt=""
-            ></img>{" "}
-            image capabilities. {/* eslint-disable-next-line */}
+            ></Image>{" "}
+            to meticulous spotlessness.
           </h1>
           {/* logo features */}
           <div className="p-4 flex flex-wrap border rounded-lg gap-6 items-center w-fit">

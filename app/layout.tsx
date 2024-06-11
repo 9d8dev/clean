@@ -1,16 +1,19 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-import Image from "next/image";
+
+import type { Metadata } from "next";
+import { Montserrat } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { NavMenu } from "@/components/layout/nav-menu";
+// import { NavMenu } from "@/components/layout/nav-menu";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { Section, Container } from "@/components/craft";
+
+import Image from "next/image";
+import Link from "next/link";
+import Sticker from "@/public/sticker.png";
 import Balancer from "react-wrap-balancer";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Curiously Clean | Auto Detailing",
@@ -50,7 +53,7 @@ const Nav = ({ className, children, id }: NavProps) => {
         </Link>
         {children}
         <div className="flex items-center gap-2">
-          <NavMenu />
+          {/* <NavMenu /> */}
           <Button asChild>
             <Link href="/book">Book Now</Link>
           </Button>
@@ -69,12 +72,7 @@ const Footer = () => {
           <div className="grid gap-6">
             <Link href="/">
               <h3 className="sr-only">Curiously Clean</h3>
-              <Image
-                src="/logo.svg"
-                alt="Logo"
-                width={164}
-                height={28.5}
-              ></Image>
+              <Image src={Sticker} alt="Logo" width={164} height={28.5}></Image>
             </Link>
             <p>
               <Balancer>
