@@ -12,7 +12,7 @@ const serviceValues: AlaCarteServiceValues = {
   waxing: "Waxing/Sealing",
 };
 
-const baseURL = "https://cal.com/cameron-youngblood-vynxzq/30min";
+const baseURL = "https://cal.com/curiouslyclean/auto-detailing";
 
 export default function Calendar({
   packageType,
