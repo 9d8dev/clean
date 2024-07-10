@@ -1,6 +1,6 @@
 import { Section, Container } from "@/components/craft";
 import Image from "next/image";
-import Logo from "@/public/logo.svg";
+import { Button } from "../ui/button";
 import Link from "next/link";
 
 import Porsche from "@/public/porsche.png";
@@ -32,12 +32,9 @@ const Hero = () => {
             to meticulous spotlessness.
           </h1>
           {/* logo features */}
-          <div className="p-4 flex flex-wrap border rounded-lg gap-6 items-center w-fit">
-            <p>As seen in:</p>
-            <Image className="h-6 w-fit dark:invert" src={Logo} alt=""></Image>
-            <Image className="h-6 w-fit dark:invert" src={Logo} alt=""></Image>
-            <Image className="h-6 w-fit dark:invert" src={Logo} alt=""></Image>
-          </div>
+          <Link href="/book">
+            <Button>Book Now</Button>
+          </Link>
           {/* End Text */}
           <div className="md:text-lg">
             <p className="hidden md:block">
@@ -49,10 +46,6 @@ const Hero = () => {
               >
                 Book Now
               </Link>
-            </p>
-            <p className="text-xs mt-4">
-              <span className="opacity-50">Available now online.</span> Tell us
-              what you build next.
             </p>
           </div>
         </div>

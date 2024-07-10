@@ -45,8 +45,20 @@ export default function Form() {
         <div>
           <Container className="max-w-2xl">
             <h1 className="text-2xl mb-6">Start by selecting a base package</h1>
-            <div className="grid gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {/* Option 1 */}
+              <Option
+                title="Interior & Exterior"
+                image={Exterior}
+                price={450}
+                description="All the services of interior and exterior cleaning in a bundled package."
+                onClick={() => {
+                  setSelectedPackage("Interior & Exterior");
+                  setStep((prev) => prev + 1);
+                }}
+              />
+
+              {/* Option 2 */}
               <Option
                 title="Interior Cleaning"
                 image={Interior}
@@ -58,7 +70,7 @@ export default function Form() {
                 }}
               />
 
-              {/* Option 2 */}
+              {/* Option 3 */}
               <Option
                 title="Exterior Cleaning"
                 image={Exterior}
@@ -70,7 +82,7 @@ export default function Form() {
                 }}
               />
 
-              {/* Option 3 */}
+              {/* Option 4 */}
               <Option
                 title="Maintenance Cleaning"
                 image={Service}
@@ -238,7 +250,7 @@ const Option = ({
   onClick: () => void;
 }) => (
   <div
-    className="border p-4 md:p-6 bg-accent/50 rounded-md hover:bg-accent transition-all cursor-pointer flex flex-col gap-4"
+    className="border p-4 md:p-6 bg-accent/50 rounded-md hover:bg-accent transition-all cursor-pointer flex flex-col gap-4 col-span-1"
     onClick={onClick}
   >
     {image && (
@@ -246,11 +258,13 @@ const Option = ({
         <Image src={image} alt={title} />
       </div>
     )}
-    <div className="flex justify-between items-center gap-6">
-      <h3 className="text-xl font-semibold">{title}</h3>
-      <p className="text-xl px-2 py-1 border rounded-sm bg-accent">${price}</p>
+    <div className="flex-col md:flex-row flex justify-between items-start md:items-center gap-6">
+      <h3 className="text-xs lg:text-xl font-semibold">{title}</h3>
+      <p className="text-xs md:text-xl px-2 py-1 border rounded-sm bg-accent">
+        ${price}
+      </p>
     </div>
     <hr />
-    <p>{description}</p>
+    <p className="text-xs md:text-base">{description}</p>
   </div>
 );

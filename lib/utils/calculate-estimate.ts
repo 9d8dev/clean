@@ -1,7 +1,8 @@
 const packagePrices: PackagePrices = {
+  "Interior & Exterior": 450,
   Interior: 225,
   Exterior: 275,
-  "Maintenance Cleaning": 135,
+  "Maintenance cleaning": 135,
 };
 
 const alacartePrices: AlaCartePrices = {
