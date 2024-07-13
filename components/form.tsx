@@ -86,7 +86,7 @@ export default function Form() {
               <Option
                 title="Maintenance Cleaning"
                 image={Service}
-                price={135}
+                price={150}
                 description="Full vacuum, steam cleaning of floor mats, seats, windows, dash, steering wheel, consoles, and trunk. Shampooing where needed. Air freshening."
                 onClick={() => {
                   setSelectedPackage("Maintenance cleaning");

@@ -38,8 +38,8 @@ const Hero = () => {
           {/* End Text */}
           <div className="md:text-lg">
             <p className="hidden md:block">
-              We are a team of passionate car enthusiasts who are dedicated to
-              providing the highest quality of service to our clients.{" "}
+              Passionate car enthusiasts, dedicated to providing the highest
+              quality of service.{" "}
               <Link
                 className="hover:opacity-70 transition-all underline"
                 href="/book"
