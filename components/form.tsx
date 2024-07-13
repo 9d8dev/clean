@@ -87,7 +87,7 @@ export default function Form() {
                 title="Maintenance Cleaning"
                 image={Service}
                 price={150}
-                description="Full vacuum, steam cleaning of floor mats, seats, windows, dash, steering wheel, consoles, and trunk. Shampooing where needed. Air freshening."
+                description="This package is ideal for our repeat customers with well-maintained cars seeking the benefits of hand washing. This package includes: exterior wash, interior vacuuming, and window washing."
                 onClick={() => {
                   setSelectedPackage("Maintenance cleaning");
                   setStep((prev) => prev + 1);

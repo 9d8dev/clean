@@ -29,7 +29,7 @@ const featureText: FeatureText[] = [
     icon: <Car className="w-6 h-6" />,
     title: "Maintenance Cleaning",
     description:
-      "Full vacuum, steam cleaning of floor mats, seats, windows, dash, steering wheel, consoles, and trunk. Shampooing where needed. Air freshening.",
+      "This package is ideal for our repeat customers with well-maintained cars seeking the benefits of hand washing. This package includes: exterior wash, interior vacuuming, and window washing.",
   },
 ];
 
