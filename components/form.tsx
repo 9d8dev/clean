@@ -32,6 +32,8 @@ export default function Form() {
     waxing: false,
   });
   const [paintCorrection, setPaintCorrection] = React.useState<boolean>(false);
+  const [acceptTerms, setAcceptTerms] = React.useState<boolean>(false);
+
   const [notes, setNotes] = React.useState<string>("");
   const [step, setStep] = React.useState(1);
 
@@ -248,6 +250,67 @@ export default function Form() {
       )}
 
       {step === 6 && (
+        <Container className="not-prose max-w-2xl bg-accent/25 border rounded-lg flex flex-col gap-4">
+          <div className="text-xs space-y-2">
+            <p>
+              Client and anyone claiming on behalf of Client releases and
+              forever discharges Curiously Clean and its affiliates, successors
+              and assigns, officers, employees, representatives, partners,
+              agents, subsidiaries and anyone claiming through them
+              (collectively, the “Released Parties”), in their individual and/or
+              corporate capacities from any and all claims, liabilities,
+              obligations, promises, agreements, disputes, demands, damages,
+              causes of action of any nature and kind, known or unknown, which
+              Client has or ever has had or may in the future have against
+              Curiously Clean or any of the Released Parties arising out of or
+              relating to the use of Curiously Clean&apos;s services and
+              facilities (“Claims”).
+            </p>
+            <p>
+              In exchange for the release of Claims, Curiously Clean will
+              provide Client its agreed upon services. In consideration of such
+              access to the services and facilities, Client agrees to accept the
+              access to Curiously Clean&apos;s services as full and complete
+              settlement and satisfaction of any present and prospective claims.
+              Further, Client hereby acknowledges and agrees that all sales and
+              services provided by Curiously Clean are final and not refundable.
+            </p>
+          </div>
+          <span className="text-xs italic">
+            *By checking this box you are agreeing to the terms listed.
+          </span>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="terms"
+              checked={acceptTerms}
+              onCheckedChange={() => setAcceptTerms((prev) => !prev)}
+            />
+            <label
+              htmlFor="terms"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex flex-col"
+            >
+              Accept terms and conditions
+            </label>
+          </div>
+          <p></p>
+          <div className="flex gap-2 mt-6">
+            <Button
+              variant="secondary"
+              onClick={() => setStep((prev) => prev - 1)}
+            >
+              Previous
+            </Button>
+            <Button
+              onClick={() => setStep((prev) => prev + 1)}
+              disabled={!acceptTerms}
+            >
+              Book
+            </Button>
+          </div>
+        </Container>
+      )}
+
+      {step === 7 && (
         <Container className="not-prose">
           <Calendar
             packageType={selectedPackage}

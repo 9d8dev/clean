@@ -81,8 +81,8 @@ const Footer = () => {
               </Balancer>
             </p>
             <div className="flex gap-4 underline underline-offset-4 text-sm text-muted-foreground">
-              <Link href="#">Privacy Policy</Link>
-              <Link href="#">Terms of Service</Link>
+              <Link href="/legal">Privacy Policy</Link>
+              <Link href="/legal">Terms of Service</Link>
             </div>
             <p className="text-muted-foreground">
               © Curiously Clean. All rights reserved. 2023-present.
