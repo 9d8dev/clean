@@ -36,7 +36,11 @@ export default function Form() {
   const [step, setStep] = React.useState(1);
 
   /* CALCULATE TOTAL COST ESTIMATE */
-  const data = calculateTotalCostEstimate(selectedPackage, alacarte);
+  const data = calculateTotalCostEstimate(
+    selectedPackage,
+    alacarte,
+    paintCorrection
+  );
   const { minPrice = 0, maxPrice = 0, itemizedList } = data ?? {};
 
   return (
@@ -149,6 +153,14 @@ export default function Form() {
               />
             </div>
           </div>
+          <div className="mb-4 text-xs">
+            <p>
+              *Paint correction involves removing surface imperfections like
+              swirl marks, scratches, and oxidation from a vehicle&apos;s paint.
+              This process uses advanced polishing techniques to restore a
+              smooth, glossy finish.
+            </p>
+          </div>
           <div className="flex gap-2">
             <Button
               variant="secondary"
@@ -203,6 +215,14 @@ export default function Form() {
               </p>
             </div>
           ))}{" "}
+          {paintCorrection && (
+            <div className="flex justify-between gap-4">
+              <p>Paint correction</p>
+              <p className="font-mono py-1 px-2 border rounded-md bg-accent/50">
+                starting at $500
+              </p>
+            </div>
+          )}
           <hr />
           <div className="flex justify-between gap-4 font-medium">
             <p>Estimated Total</p>
@@ -210,6 +230,11 @@ export default function Form() {
               $<CountUp end={minPrice} /> - $<CountUp end={maxPrice} />
             </p>
           </div>
+          <p className="text-xs">
+            *This is purely an estimate. We reserve the right to increase or
+            decrease the price at will based on further assessment. Before we
+            begin work on your car, we will clearly communicate the cost to you.
+          </p>
           <div className="flex gap-2 mt-6">
             <Button
               variant="secondary"

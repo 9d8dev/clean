@@ -30,7 +30,8 @@ const alacartePrices: AlaCartePrices = {
 
 export function calculateTotalCostEstimate(
   selectedPackage: string | null,
-  alacarte: AlaCarteStateObject
+  alacarte: AlaCarteStateObject,
+  paintCorrection: boolean
 ): TotalCostEstimateType | undefined {
   if (!selectedPackage) return undefined;
 
@@ -61,8 +62,8 @@ export function calculateTotalCostEstimate(
   });
 
   return {
-    minPrice,
-    maxPrice,
+    minPrice: paintCorrection ? minPrice + 500 : minPrice,
+    maxPrice: paintCorrection ? maxPrice + 500 : maxPrice,
     itemizedList,
   };
 }
