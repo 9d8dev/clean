@@ -6,7 +6,7 @@ export async function POST(request: Request) {
   const signature = request.headers.get("X-Cal-Signature-256");
 
   const hmac = crypto.createHmac("sha256", secretKey);
-  hmac.update(body);
+  hmac.update(JSON.stringify(body));
   const calculatedSignature = hmac.digest("base64");
 
   if (signature !== calculatedSignature) {
