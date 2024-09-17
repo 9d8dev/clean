@@ -1,18 +1,7 @@
 import crypto from "crypto";
 
 export async function POST(request: Request) {
-  const secretKey = process.env.CAL_SECRET_KEY!;
   const body = await request.json();
-  const signature = request.headers.get("X-Cal-Signature-256");
-
-  const hmac = crypto.createHmac("sha256", secretKey);
-  hmac.update(JSON.stringify(body));
-  const calculatedSignature = hmac.digest("base64");
-
-  if (signature !== calculatedSignature) {
-    console.error("Invalid signature, request cannot be trusted");
-    return new Response("Invalid signature", { status: 401 });
-  }
 
   const attendee = body.payload.attendees[0];
   const email = attendee.email;
